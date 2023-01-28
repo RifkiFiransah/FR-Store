@@ -15,7 +15,14 @@
               </a>
 
               <div class="user-menu dropdown-menu">
-                  <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                <a class="dropdown-item nav-link" href="{{ route('logout') }}"
+                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="fa fa-power -off">{{ __('Logout') }}</i>
+                </a>
+
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none nav-link">
+                    @csrf
+                </form>
               </div>
           </div>
 
