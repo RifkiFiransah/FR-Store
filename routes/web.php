@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use App\Http\Controllers\dashboardController;
 |
 */
 
-Route::get('/', [dashboardController::class, 'index'])->name('Dashboard');
+Route::get('/', [dashboardController::class, 'index'])->name('dashboard');
+Route::resource('/products', ProductController::class);
 
 Auth::routes(['register' => false]);
 
