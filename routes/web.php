@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductGalleriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ use App\Http\Controllers\ProductController;
 
 Route::get('/', [dashboardController::class, 'index'])->name('dashboard');
 Route::resource('/products', ProductController::class);
+Route::resource('/product-galleri', ProductGalleriController::class)->except(['show', 'edit', 'update']);
 
 Auth::routes(['register' => false]);
 

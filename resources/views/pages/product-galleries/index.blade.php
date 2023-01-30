@@ -31,7 +31,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-header">
-          <strong class="card-title">Data Barang</strong>
+          <strong class="card-title">Data Image Barang</strong>
         </div>
         <div class="table-stats order-table ov-h"">
           <table class="table">
@@ -39,10 +39,8 @@
               <tr>
                 <th class="serial">#</th>
                 <th>Nama Barang</th>
-                <th>Harga</th>
-                <th>Tipe</th>
-                <th>Deskripsi</th>
-                <th>Kuantitas</th>
+                <th>Image</th>
+                <th>Default</th>
                 <th>Aksi</th>
               </tr>
             </thead>
@@ -50,15 +48,11 @@
               @forelse ($items as $item)
               <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $item->name }}</td>
-                <td>{{ $item->price }}</td>
-                <td>{{ $item->type }}</td>
-                <td>{!! $item->description !!}</td>
-                <td>{{ $item->quantity }}</td>
+                <td>{{ $item->product->name }}</td>
+                <td><img src="{{ $item->photo }}" width="300"></td>
+                <td>{{ $item->is_default }}</td>
                 <td>
-                  <a href="{{ route('products.show', $item->id) }}" class="btn btn-info btn-small"><i class="fa fa-picture-o"></i></a>
-                  <a href="{{ route('products.edit', $item->id) }}" class="btn btn-primary btn-small"><i class="fa fa-pencil"></i></a>
-                  <form action="{{ route('products.destroy', $item->id) }}" method="post" class="d-inline">
+                  <form action="{{ route('product-galleri.destroy', $item->id) }}" method="post" class="d-inline">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger btn-small"><i class="fa fa-trash"></i></button>
@@ -67,7 +61,7 @@
               </tr>
               @empty
               <tr>
-                <td colspan="7" class="text-center">Barang Belum Tersedia</td>s
+                <td colspan="7" class="text-center">Image Barang Belum Tersedia</td>s
               </tr>
               @endforelse
             </tbody>

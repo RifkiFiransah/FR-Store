@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 // use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Models\product;
+use App\Models\product_galleri;
 
 class ProductController extends Controller
 {
@@ -29,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.create');
+        return view('pages.products.create');
     }
 
     /**
@@ -55,7 +56,13 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = product::findOrFail($id);
+        $item = product_galleri::with('product')->where('product_id', $id)->first();
+
+        return view('pages.products.show', [
+            'items' => $item,
+            'product' => $product
+        ]);
     }
 
     /**
@@ -97,6 +104,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $item = product::findOrFail($id);
+        product_galleri::where('product_id', $id)->delete();
 
         $item->delete();
         return redirect()->route('products.index');
