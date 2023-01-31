@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductGalleriController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ use App\Http\Controllers\ProductGalleriController;
 Route::get('/', [dashboardController::class, 'index'])->name('dashboard');
 Route::resource('/products', ProductController::class);
 Route::resource('/product-galleri', ProductGalleriController::class)->except(['show', 'edit', 'update']);
-
+Route::resource('/transactions', TransactionController::class);
+Route::get('/transactions/{id}/status', [TransactionController::class, 'status'])->name('transactions.status');
 Auth::routes(['register' => false]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
