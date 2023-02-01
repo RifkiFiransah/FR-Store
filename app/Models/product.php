@@ -14,7 +14,7 @@ class product extends Model
 
     protected $guarded = ['id'];
 
-    public function Galleris()
+    public function galleris()
     {
         return $this->hasMany(product_galleri::class, 'product_id');
     }
